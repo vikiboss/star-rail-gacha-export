@@ -99,4 +99,4 @@ for (const [type, _] of Object.entries(gacha)) {
   res.push(records)
 }
 
-await fs.writeFile('./data.json', JSON.stringify(res, null, 2))
+await fs.writeFile('./list.json', JSON.stringify(res, null, 2))
