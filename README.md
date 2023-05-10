@@ -1,3 +1,29 @@
-# 「崩坏 · 星穹铁道」 跃迁记录导出
+# 「崩坏 · 星穹铁道」 跃迁记录导出脚本
 
-> TODO
+## 如何使用？
+
+> 请确保安装了 [node](https://nodejs.org) 环境。
+
+### 1. 克隆本仓库
+
+```bash
+git clone git@github.com:vikiboss/star-rail-gacha-export
+```
+
+### 2. 安装依赖
+
+```bash
+npm i
+```
+
+### 3. 执行脚本
+
+```bash
+npm run dev
+```
+
+### 4. 根据提示操作
+
+根据提示输入跃迁链接，跃迁链接获取方式[参考这里](https://mp.weixin.qq.com/s/CzSTvRDJ3C3SVDQKPcLvVA)。
+
+完成后，记录文件将保存当前目录的 `star-rail-[uid]-[timestamp].json` 下。
