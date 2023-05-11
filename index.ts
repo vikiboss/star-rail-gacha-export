@@ -5,7 +5,7 @@ import prompts from '@vmoe/node-utils/prompts'
 import { fetchUigfRecords } from './api'
 
 const { url, useProxy } = await prompts([
-  { type: 'text', name: 'url', message: '请输入抽卡链接' },
+  { type: 'text', name: 'url', message: '请输入跃迁链接（获取方式参考 README 说明）' },
   {
     type: 'confirm',
     name: 'useProxy',

@@ -23,8 +23,8 @@ npm i
 npm run dev
 ```
 
-### 4. 根据提示操作
+### 4. 按提示操作
 
-根据提示输入跃迁链接，跃迁链接获取方式[参考这里](https://mp.weixin.qq.com/s/CzSTvRDJ3C3SVDQKPcLvVA)。
+根据提示输入跃迁链接并确认，跃迁链接获取方式[参考这里](https://mp.weixin.qq.com/s/CzSTvRDJ3C3SVDQKPcLvVA)。
 
 完成后，记录文件将保存当前目录的 `star-rail-[uid]-[timestamp].json` 下。
