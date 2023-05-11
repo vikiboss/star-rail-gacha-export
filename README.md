@@ -2,7 +2,7 @@
 
 ## 如何使用？
 
-> 请确保安装了 [node](https://nodejs.org) 环境。
+> 请确保安装了 [Git](https://git-scm.com/) 和 [Node.js](https://nodejs.org/) 环境。
 
 ### 1. 克隆本仓库
 
@@ -13,6 +13,7 @@ git clone git@github.com:vikiboss/star-rail-gacha-export
 ### 2. 安装依赖
 
 ```bash
+cd star-rail-gacha-export
 npm i
 ```
 

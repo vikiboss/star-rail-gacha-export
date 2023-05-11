@@ -9,7 +9,7 @@ const { url, useProxy } = await prompts([
   {
     type: 'confirm',
     name: 'useProxy',
-    message: '是否使用代理获取记录？（不知道就选否）'
+    message: '是否使用代理域名获取记录？（如果域名被屏蔽可以开启）'
   }
 ])
 
