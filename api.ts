@@ -59,7 +59,7 @@ export async function fetchRecordsByGachaType(
     page += 1
     await wait(200)
     logWithTime(`开始获取 第 ${page} 页...`)
-    const { data } = await request(createURL(link, type, page, 10, endId, useProxy))
+    const { data } = await request(createURL(link, type, endId, page, 10, useProxy))
 
     if (!data?.data || data?.data?.list?.length === 0) {
       break
