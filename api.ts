@@ -74,6 +74,7 @@ export async function fetchRecordsByGachaType(
 
 export async function fetchGachaRecords(link: string, useProxy = false) {
   let uid: string = ''
+  let lang: string = ''
   const list = []
 
   for (const [type, name] of Object.entries(gacha)) {
@@ -82,9 +83,8 @@ export async function fetchGachaRecords(link: string, useProxy = false) {
     const rawRecords = await fetchRecordsByGachaType(link, type, useProxy)
 
     const records = rawRecords.map(e => {
-      if (!uid) {
-        uid = e.uid
-      }
+      if (!uid) uid = e.uid
+      if (!lang) lang = e.lang
 
       delete e.uid
       delete e.lang
@@ -95,11 +95,11 @@ export async function fetchGachaRecords(link: string, useProxy = false) {
     logWithTime(`共获取到 ${records.length} 条 「${name}」 记录`)
   }
 
-  return { list, uid }
+  return { list, uid, lang }
 }
 
 export async function fetchUigfRecords(link: string, useProxy = false) {
-  const { list, uid } = await fetchGachaRecords(link, useProxy)
+  const { uid, lang, list } = await fetchGachaRecords(link, useProxy)
 
   if (!uid) {
     return null
@@ -107,7 +107,7 @@ export async function fetchUigfRecords(link: string, useProxy = false) {
 
   const info = {
     uid,
-    lang: 'zh-cn',
+    lang,
     region_time_zone: 8,
     export_timestamp: timestamp(),
     export_app: pkg?.name,
