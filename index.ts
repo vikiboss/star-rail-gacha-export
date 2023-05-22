@@ -1,4 +1,4 @@
-import { logWithTime } from '@vmoe/node-utils'
+import { colors, logWithTime } from '@vmoe/node-utils'
 import { fs } from '@vmoe/node-utils/fs'
 import prompts from '@vmoe/node-utils/prompts'
 
@@ -29,4 +29,4 @@ const filename = `./star-rail-${res.info.uid}-${res.info.export_timestamp}.json`
 
 await fs.writeFile(filename, JSON.stringify(res, null, 2), 'utf-8')
 
-logWithTime(`跃迁记录已成功导出到当前目录下的 ${filename} 文件！`)
+logWithTime(colors.green(`总计 ${res.list.length} 条数据，已导出到 ${filename}`))

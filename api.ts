@@ -1,4 +1,4 @@
-import { logWithTime, timestamp, wait } from '@vmoe/node-utils'
+import { logWithTime, colors, timestamp, wait } from '@vmoe/node-utils'
 import { request } from '@vmoe/node-utils/axios'
 import { fs } from '@vmoe/node-utils/fs'
 
@@ -42,7 +42,7 @@ export async function fetchRecordsByGachaType(
 ) {
   let page = 1
 
-  logWithTime(`开始获取 第 ${page} 页...`)
+  logWithTime(`正在获取第 ${page} 页...`)
   const { data } = await request(createURL(link, type, 0, page, 10, useProxy))
   const result = []
 
@@ -59,7 +59,7 @@ export async function fetchRecordsByGachaType(
   while (true) {
     page += 1
     await wait(200)
-    logWithTime(`开始获取 第 ${page} 页...`)
+    logWithTime(`正在获取第 ${page} 页...`)
     const { data } = await request(createURL(link, type, endId, page, 10, useProxy))
 
     if (!data?.data || data?.data?.list?.length === 0) {
@@ -79,7 +79,7 @@ export async function fetchGachaRecords(link: string, useProxy = false) {
   const list = []
 
   for (const [type, name] of Object.entries(gacha)) {
-    logWithTime(`开始获取 「${name}」 跃迁记录...`)
+    logWithTime(colors.yellow(`开始获取 「${name}」 跃迁记录...`))
 
     const rawRecords = await fetchRecordsByGachaType(link, type, useProxy)
 
@@ -95,7 +95,7 @@ export async function fetchGachaRecords(link: string, useProxy = false) {
 
     list.push(...records)
 
-    logWithTime(`共获取到 ${records.length} 条 「${name}」 记录`)
+    logWithTime(colors.green(`共获取到 ${records.length} 条 「${name}」 记录`))
   }
 
   return { list, uid, lang }
