@@ -2,7 +2,7 @@ import { logWithTime } from '@vmoe/node-utils'
 import { fs } from '@vmoe/node-utils/fs'
 import prompts from '@vmoe/node-utils/prompts'
 
-import { fetchUigfRecords } from './api'
+import { fetchSrgfRecords } from './api'
 
 const { url, useProxy } = await prompts([
   { type: 'text', name: 'url', message: '请输入跃迁链接（获取方式参考 README 说明）' },
@@ -13,17 +13,20 @@ const { url, useProxy } = await prompts([
   }
 ])
 
-const res = await fetchUigfRecords(url, useProxy)
+if (!url || !/$\s*https?:\/\//.test(url)) {
+  logWithTime('不是合法的链接，请重新输入！')
+  process.exit(1)
+}
+
+const res = await fetchSrgfRecords(url.trim(), useProxy)
 
 if (!res) {
   logWithTime('获取失败，链接无效或已过期，请重新抓取')
   process.exit(1)
 }
 
-await fs.writeFile(
-  `./star-rail-${res.info.uid}-${res.info.export_timestamp}.json`,
-  JSON.stringify(res),
-  'utf-8'
-)
+const filename = `./star-rail-${res.info.uid}-${res.info.export_timestamp}.json`
 
-logWithTime('跃迁记录已成功导出到 list.json 文件！')
+await fs.writeFile(filename, JSON.stringify(res, null, 2), 'utf-8')
+
+logWithTime(`跃迁记录已成功导出到当前目录下的 ${filename} 文件！`)

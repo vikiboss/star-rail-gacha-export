@@ -98,7 +98,7 @@ export async function fetchGachaRecords(link: string, useProxy = false) {
   return { list, uid, lang }
 }
 
-export async function fetchUigfRecords(link: string, useProxy = false) {
+export async function fetchSrgfRecords(link: string, useProxy = false) {
   const { uid, lang, list } = await fetchGachaRecords(link, useProxy)
 
   if (!uid) {
