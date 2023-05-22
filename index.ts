@@ -13,7 +13,7 @@ const { url, useProxy } = await prompts([
   }
 ])
 
-if (!url || !/$\s*https?:\/\//.test(url)) {
+if (!url || !/^\s*https?:\/\//.test(url)) {
   logWithTime('不是合法的链接，请重新输入！')
   process.exit(1)
 }
