@@ -47,6 +47,7 @@ export async function fetchRecordsByGachaType(
   const result = []
 
   if (!data.data?.list) {
+    logWithTime(data)
     logWithTime('链接可能已失效，请重新抓取！')
     process.exit(1)
   }
