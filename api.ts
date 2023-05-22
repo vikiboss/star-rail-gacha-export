@@ -89,6 +89,8 @@ export async function fetchGachaRecords(link: string, useProxy = false) {
 
       delete e.uid
       delete e.lang
+
+      return e
     })
 
     list.push(...records)
