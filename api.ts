@@ -73,21 +73,33 @@ export async function fetchRecordsByGachaType(
 }
 
 export async function fetchGachaRecords(link: string, useProxy = false) {
-  const res = []
+  let uid: string = ''
+  const list = []
 
   for (const [type, name] of Object.entries(gacha)) {
     logWithTime(`开始获取 「${name}」 跃迁记录...`)
-    const records = await fetchRecordsByGachaType(link, type, useProxy)
-    res.push(records)
+
+    const rawRecords = await fetchRecordsByGachaType(link, type, useProxy)
+
+    const records = rawRecords.map(e => {
+      if (!uid) {
+        uid = e.uid
+      }
+
+      delete e.uid
+      delete e.lang
+    })
+
+    list.push(...records)
+
     logWithTime(`共获取到 ${records.length} 条 「${name}」 记录`)
   }
 
-  return res
+  return { list, uid }
 }
 
 export async function fetchUigfRecords(link: string, useProxy = false) {
-  const list = await fetchGachaRecords(link, useProxy)
-  const uid = list?.[0]?.[0]?.uid
+  const { list, uid } = await fetchGachaRecords(link, useProxy)
 
   if (!uid) {
     return null
@@ -95,11 +107,12 @@ export async function fetchUigfRecords(link: string, useProxy = false) {
 
   const info = {
     uid,
-    lang: 'zh-CN',
+    lang: 'zh-cn',
+    region_time_zone: 8,
     export_timestamp: timestamp(),
     export_app: pkg?.name,
     export_app_version: `v${pkg?.version}`,
-    uigf_version: 'v2.3'
+    srgf_version: 'v1.0'
   }
 
   return { info, list } as const
