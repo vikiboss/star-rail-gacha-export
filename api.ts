@@ -14,10 +14,12 @@ export function createURL(
 ) {
   const url = new URL(link)
 
+  url.searchParms.set('begin_id','0')
   url.searchParams.set('size', String(size))
   url.searchParams.set('page', String(page))
   url.searchParams.set('gacha_type', String(type))
   url.searchParams.set('end_id', String(endId))
+
 
   if (useProxy) {
     const host = url.host
